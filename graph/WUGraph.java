@@ -12,8 +12,7 @@ import dict.*;
 public class WUGraph {
   protected HashTableChained vertexRef;
   protected HashTableChained edgeRef;
-  protected Dlist vertices;
-  protected Dlist edges;
+  protected DList vertices;
 
   /**
    * WUGraph() constructs a graph having no vertices or edges.
@@ -21,13 +20,18 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public WUGraph();
+    vertexRef = new HashTableChained();
+    edgeRef = new HashTableChained();
+    vertices = new DList();
 
   /**
    * vertexCount() returns the number of vertices in the graph.
    *
    * Running time:  O(1).
    */
-  public int vertexCount();
+  public int vertexCount() {
+    return vertices.length();
+  }
 
   /**
    * edgeCount() returns the total number of edges in the graph.
@@ -48,8 +52,17 @@ public class WUGraph {
    *
    * Running time:  O(|V|).
    */
-  public Object[] getVertices();
-
+  public Object[] getVertices() {
+    Object[] toReturn = new Object[vertices.length()];
+    int index = 0;
+    DListNode curr = vertices.front();
+    while (curr.isValidNode()) {
+      toReturn[index] = curr.item();
+      curr = curr.next(); 
+      index++;
+    }
+    return toReturn;
+  }
   /**
    * addVertex() adds a vertex (with no incident edges) to the graph.
    * The vertex's "name" is the object provided as the parameter "vertex".
