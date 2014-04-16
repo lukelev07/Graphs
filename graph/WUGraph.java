@@ -10,7 +10,10 @@ import dict.*;
  */
 
 public class WUGraph {
-
+  protected HashTableChained vertexRef;
+  protected HashTableChained edgeRef;
+  protected Dlist vertices;
+  protected Dlist edges;
 
   /**
    * WUGraph() constructs a graph having no vertices or edges.
