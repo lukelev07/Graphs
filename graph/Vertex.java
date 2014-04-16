@@ -1,9 +1,11 @@
 /* Vertex.java */
 
-package Graph;
+package graph;
+import list.*;
+import dict.*;
 
 public class Vertex {
-    protected Dlist edges;
+    protected DList edges;
     protected WUGraph myGraph;
 
     /** 
@@ -13,13 +15,13 @@ public class Vertex {
      **/
     public Vertex(WUGraph graph) {
         this.myGraph = graph;
-        edges = new Dlist();
+        edges = new DList();
     }
     
     /** 
      *  Returns the edges of this Vertex.
      **/
-    public Dlist getEdges() {
+    public DList getEdges() {
         return edges;
     }
 }
