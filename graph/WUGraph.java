@@ -71,6 +71,12 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public void addVertex(Object vertex);
+    //initialize vertex with name. 
+    Vertex toAdd = new Vertex(vertex, this);
+    vertices.insertFront(toAdd);
+    //hash in table and point to internal DList 
+    int key = compFunction(toAdd.hashCdoe());
+    vertexRef.insert(key, toAdd);
 
   /**
    * removeVertex() removes a vertex from the graph.  All edges incident on the
