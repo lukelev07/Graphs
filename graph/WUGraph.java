@@ -1,6 +1,8 @@
 /* WUGraph.java */
 
 package graph;
+import list.*;
+import dict.*;
 
 /**
  * The WUGraph class represents a weighted, undirected graph.  Self-edges are
@@ -8,6 +10,7 @@ package graph;
  */
 
 public class WUGraph {
+
 
   /**
    * WUGraph() constructs a graph having no vertices or edges.
