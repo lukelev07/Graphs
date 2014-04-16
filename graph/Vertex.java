@@ -26,4 +26,11 @@ public class Vertex {
     public DList getEdges() {
         return edges;
     }
+
+    /**
+    * returns the graph this vertex belongs to
+    **/
+    public WUGraph getGraph() {
+        return this.myGraph;
+    }
 }

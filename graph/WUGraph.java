@@ -70,13 +70,18 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public void addVertex(Object vertex);
-    //initialize vertex with name. 
+  public void addVertex(Object vertex) {
+    //initialize vertex with name, insert into DList  
     Vertex toAdd = new Vertex(vertex, this);
     vertices.insertFront(toAdd);
+
     //hash in table and point to internal DList 
     int key = compFunction(toAdd.hashCdoe());
     vertexRef.insert(key, toAdd);
+
+    //create reference to applications object 
+  }
+
 
   /**
    * removeVertex() removes a vertex from the graph.  All edges incident on the
@@ -93,7 +98,13 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public boolean isVertex(Object vertex);
+  public boolean isVertex(Object vertex) {
+    // decide if vertex is a Valid vertex in this graph.
+    if (vertex.getGraph() == this) {
+      return true;
+    }
+    return false;
+  }
 
   /**
    * degree() returns the degree of a vertex.  Self-edges add only one to the
