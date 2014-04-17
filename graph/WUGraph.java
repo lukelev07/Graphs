@@ -99,12 +99,8 @@ public class WUGraph {
       if (!isVertex(vertex)) {
           return;
       }
-<<<<<<< HEAD
       // iterate through the edges and remove them
       // remove edges from hash table
-=======
->>>>>>> d36207faea71db759e1f41b3d885aed2caec6781
-
   }
 
   /**
