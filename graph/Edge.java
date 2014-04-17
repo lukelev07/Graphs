@@ -10,8 +10,8 @@ public class Edge {
     protected WUGraph myGraph;
     protected Edge partner;
     protected boolean directed;
-    protected Vertex from;
-    protected Vertex to;
+    protected Vertex v1;
+    protected Vertex v2;
     protected int weight;
     
     /**
@@ -24,8 +24,8 @@ public class Edge {
     **/
     public Edge(Vertex to, Vertex from, boolean directed, int weight, WUGraph myGraph) {
         partner = null;
-        this.to = to;
-        this.from = from;
+        this.v1 = to;
+        this.v2 = from;
         this.directed = directed;
         this.weight = weight;
         this.myGraph = myGraph;
@@ -41,8 +41,8 @@ public class Edge {
     **/
     public Edge(Vertex to, Vertex from, Edge partner, boolean directed, int weight, WUGraph myGraph) {
         this.partner = partner;
-        this.to = to;
-        this.from = from;
+        this.v1 = to;
+        this.v2 = from;
         this.directed = directed;
         this.weight = weight;
         this.myGraph = myGraph;
@@ -51,15 +51,15 @@ public class Edge {
     /**
     * returns where edge points  
     **/
-    public Vertex getTo() {
-        return this.to;
+    public Vertex getv2() {
+        return this.v2;
     }
 
     /**
     * returns where edge came from
     **/
-    public Vertex getFrom() {
-        return this.from;
+    public Vertex getv1() {
+        return this.v1;
     }
 
     /**
