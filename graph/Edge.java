@@ -39,7 +39,7 @@ public class Edge {
     * @param weight is the weight of this edge 
     * @param myGraph is the graph this edge belongs to 
     **/
-    public Edge(Vertex to, Vertex from, Edge partner, boolean directed, int weight WUGraph myGraph) {
+    public Edge(Vertex to, Vertex from, Edge partner, boolean directed, int weight, WUGraph myGraph) {
         this.partner = partner;
         this.to = to;
         this.from = from;
