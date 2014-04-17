@@ -19,11 +19,11 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public WUGraph();
-    vertexRef = new HashTableChained();
-    edgeRef = new HashTableChained();
-    vertices = new DList();
-
+  public WUGraph() {
+      vertexRef = new HashTableChained();
+      edgeRef = new HashTableChained();
+      vertices = new DList();
+  }
   /**
    * vertexCount() returns the number of vertices in the graph.
    *
@@ -55,11 +55,16 @@ public class WUGraph {
   public Object[] getVertices() {
     Object[] toReturn = new Object[vertices.length()];
     int index = 0;
-    DListNode curr = vertices.front();
-    while (curr.isValidNode()) {
-      toReturn[index] = curr.item();
-      curr = curr.next(); 
-      index++;
+    DListNode curr = (DListNode)vertices.front();
+    try {
+        while (curr.isValidNode()) {
+            toReturn[index] = curr.item();
+            curr = (DListNode)curr.next();
+            index++;
+        }
+    }
+    catch (InvalidNodeException e1) {
+        // End of vertex list
     }
     return toReturn;
   }
