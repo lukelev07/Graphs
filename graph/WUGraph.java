@@ -19,11 +19,11 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public WUGraph();
-    vertexRef = new HashTableChained();
-    edgeRef = new HashTableChained();
-    vertices = new DList();
-
+  public WUGraph() {
+      vertexRef = new HashTableChained();
+      edgeRef = new HashTableChained();
+      vertices = new DList();
+  }
   /**
    * vertexCount() returns the number of vertices in the graph.
    *
@@ -38,7 +38,9 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public int edgeCount();
+  public int edgeCount() {
+      return 0;
+  }
 
   /**
    * getVertices() returns an array containing all the objects that serve
@@ -55,11 +57,16 @@ public class WUGraph {
   public Object[] getVertices() {
     Object[] toReturn = new Object[vertices.length()];
     int index = 0;
-    DListNode curr = vertices.front();
-    while (curr.isValidNode()) {
-      toReturn[index] = curr.item();
-      curr = curr.next(); 
-      index++;
+    DListNode curr = (DListNode)vertices.front();
+    try {
+        while (curr.isValidNode()) {
+            toReturn[index] = curr.item();
+            curr = (DListNode)curr.next();
+            index++;
+        }
+    }
+    catch (InvalidNodeException e1) {
+        // End of vertex list
     }
     return toReturn;
   }
@@ -73,11 +80,11 @@ public class WUGraph {
   public void addVertex(Object vertex) {
     //initialize vertex with name, insert into DList  
     Vertex toAdd = new Vertex(vertex, this);
-    vertices.insertFront(toAdd);
+    vertices.insertBack((Object)toAdd);
 
     //hash in table and point to internal DList 
-    int key = compFunction(toAdd.hashCdoe());
-    vertexRef.insert(key, toAdd);
+    int key = compFunction(toAdd.hashCode());
+    vertexRef.insert(key, (Object)toAdd);
 
     //create reference to applications object 
   }
@@ -90,7 +97,9 @@ public class WUGraph {
    *
    * Running time:  O(d), where d is the degree of "vertex".
    */
-  public void removeVertex(Object vertex);
+  public void removeVertex(Object vertex) {
+      return;
+  }
 
   /**
    * isVertex() returns true if the parameter "vertex" represents a vertex of
@@ -100,7 +109,7 @@ public class WUGraph {
    */
   public boolean isVertex(Object vertex) {
     // decide if vertex is a Valid vertex in this graph.
-    if (vertex.getGraph() == this) {
+    if (((Vertex)vertex).getGraph() == this) {
       return true;
     }
     return false;
@@ -113,7 +122,12 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public int degree(Object vertex);
+  public int degree(Object vertex) {
+      if (!isVertex(vertex)) {
+          return 0;
+      }
+      return ((Vertex)vertex).getEdges().length();
+  }
 
   /**
    * getNeighbors() returns a new Neighbors object referencing two arrays.  The
@@ -133,7 +147,9 @@ public class WUGraph {
    *
    * Running time:  O(d), where d is the degree of "vertex".
    */
-  public Neighbors getNeighbors(Object vertex);
+  public Neighbors getNeighbors(Object vertex) {
+      return null;
+  }
 
   /**
    * addEdge() adds an edge (u, v) to the graph.  If either of the parameters
@@ -144,7 +160,9 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public void addEdge(Object u, Object v, int weight);
+  public void addEdge(Object u, Object v, int weight) {
+      return;
+  }
 
   /**
    * removeEdge() removes an edge (u, v) from the graph.  If either of the
@@ -154,7 +172,9 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public void removeEdge(Object u, Object v);
+  public void removeEdge(Object u, Object v) {
+      return;
+  }
 
   /**
    * isEdge() returns true if (u, v) is an edge of the graph.  Returns false
@@ -163,7 +183,9 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public boolean isEdge(Object u, Object v);
+  public boolean isEdge(Object u, Object v) {
+      return false;
+  }
 
   /**
    * weight() returns the weight of (u, v).  Returns zero if (u, v) is not
@@ -179,6 +201,8 @@ public class WUGraph {
    *
    * Running time:  O(1).
    */
-  public int weight(Object u, Object v);
+  public int weight(Object u, Object v) {
+      return 0;
+  }
 
 }
