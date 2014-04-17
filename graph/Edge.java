@@ -17,7 +17,6 @@ public class Edge {
     * Constructor for an edge without a partner in an undirected weighted graph
     * @param to is the vertex which this edge points 
     * @param from is the vertex which this edge began
-    * @param partner is the edge that may or may not be a partner of this edge 
     * @param weight is the weight of this edge 
     * @param myGraph is the graph this edge belongs to 
     **/
