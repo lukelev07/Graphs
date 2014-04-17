@@ -96,7 +96,10 @@ public class WUGraph {
    * Running time:  O(d), where d is the degree of "vertex".
    */
   public void removeVertex(Object vertex) {
-      return;
+      if (!isVertex(vertex)) {
+          return;
+      }
+
   }
 
   /**
