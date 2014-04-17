@@ -1,6 +1,6 @@
 /* QueueEmptyException.java */
 
-package list;
+package graphalg.queues;
 
 public class QueueEmptyException extends Exception {
 

@@ -1,6 +1,6 @@
 /* Queue.java */
 
-package list;
+package graphalg.queues;
 
 public interface Queue {
 
