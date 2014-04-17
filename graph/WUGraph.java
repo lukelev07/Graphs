@@ -30,7 +30,7 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int vertexCount() {
-    return vertices.length();
+    return vertexRef.size();
   }
 
   /**
@@ -39,7 +39,7 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int edgeCount() {
-      return 0;
+      return edgeRef.size();
   }
 
   /**
@@ -83,10 +83,8 @@ public class WUGraph {
     vertices.insertBack((Object)toAdd);
 
     //hash in table and point to internal DList 
-    int key = compFunction(toAdd.hashCode());
+    int key = vertexRef.compFunction(toAdd.hashCode());
     vertexRef.insert(key, (Object)toAdd);
-
-    //create reference to applications object 
   }
 
 
