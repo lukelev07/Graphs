@@ -99,8 +99,11 @@ public class WUGraph {
       if (!isVertex(vertex)) {
           return;
       }
+<<<<<<< HEAD
       // iterate through the edges and remove them
       // remove edges from hash table
+=======
+>>>>>>> d36207faea71db759e1f41b3d885aed2caec6781
 
   }
 
@@ -210,7 +213,6 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int weight(Object u, Object v) {
-
       return 0;
   }
 
