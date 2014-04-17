@@ -1,6 +1,6 @@
 /* LinkedQueue.java */
 
-package list;
+package graphalg.queues;
 
 public class LinkedQueue implements Queue {
 

@@ -1,6 +1,6 @@
 /* SListNode.java */
 
-package list;
+package graphalg.queues;
 
 /**
  *  SListNode is a class used internally by the SList class.  An SList object

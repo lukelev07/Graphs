@@ -1,6 +1,6 @@
 /* ListSorts.java */
 
-import list.*;
+import queues.*;
 
 public class ListSorts {
 
