@@ -73,11 +73,11 @@ public class WUGraph {
   public void addVertex(Object vertex) {
     //initialize vertex with name, insert into DList  
     Vertex toAdd = new Vertex(vertex, this);
-    vertices.insertFront(toAdd);
+    vertices.insertBack((Object)toAdd);
 
     //hash in table and point to internal DList 
-    int key = compFunction(toAdd.hashCdoe());
-    vertexRef.insert(key, toAdd);
+    int key = compFunction(toAdd.hashCode());
+    vertexRef.insert(key, (Object)toAdd);
 
     //create reference to applications object 
   }
