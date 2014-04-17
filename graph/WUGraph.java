@@ -146,8 +146,12 @@ public class WUGraph {
    * Running time:  O(d), where d is the degree of "vertex".
    */
   public Neighbors getNeighbors(Object vertex) {
-      
-      return null;
+      Neighbors toReturn = new Neighbors();
+      Vertex insert = (Vertex)this.vertexRef.find(vertex).key();
+      while (!insert.edges.isEmpty()) {
+          
+      }
+      return toReturn;
   }
 
   /**

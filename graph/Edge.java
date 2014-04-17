@@ -9,7 +9,6 @@ import dict.*;
 public class Edge {
     protected WUGraph myGraph;
     protected Edge partner;
-    protected boolean directed;
     protected Vertex v1;
     protected Vertex v2;
     protected int weight;
@@ -26,7 +25,6 @@ public class Edge {
         partner = null;
         this.v1 = to;
         this.v2 = from;
-        this.directed = directed;
         this.weight = weight;
         this.myGraph = myGraph;
     }
@@ -43,7 +41,6 @@ public class Edge {
         this.partner = partner;
         this.v1 = to;
         this.v2 = from;
-        this.directed = directed;
         this.weight = weight;
         this.myGraph = myGraph;
     }
@@ -84,13 +81,6 @@ public class Edge {
         else {
             return null;
         }
-    }
-
-    /**
-    * boolean returns true if said edge is directed
-    **/
-    public boolean isDirected() {
-        return directed;
     }
 
     /**
