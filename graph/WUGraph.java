@@ -273,7 +273,16 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int weight(Object u, Object v) {
-      return 0;
+      if (!isEdge(u, v)) {
+          return 0;
+      }
+      // need to get internal representation of the edge
+      VertexPair internalEdge = new VertexPair(u, v);
+      Edge edge = (Edge) edgeRef.find(internalEdge).value();
+
+      // find its associated weight
+      int edgeWeight = edge.getWeight();
+      return edgeWeight;
   }
 
 }

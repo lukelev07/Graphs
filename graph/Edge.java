@@ -103,4 +103,12 @@ public class Edge {
         this.weight = newVal;
     }
 
+
+    /**
+     * getWeight() returns the weight of this edge
+    **/
+    public int getWeight() {
+        return this.weight;
+    }
+
 }
