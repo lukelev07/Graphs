@@ -110,7 +110,7 @@ public class WUGraph {
       // must do the following:
       // 1. Find the vertex to remove internally
       // 2. Iterate through its edges and delete them along with their partner edges
-      // 3. Remove the Vertex from vertexRef table; update vCount 
+      // 3. Remove the Vertex from vertexRef table; update vCount
 
       // find internal representation of Vertex
       Vertex toRemove = getVertex(vertex);
