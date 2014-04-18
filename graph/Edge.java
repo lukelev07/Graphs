@@ -9,8 +9,7 @@ import dict.*;
 public class Edge {
     protected WUGraph myGraph;
     protected Edge partner;
-    protected Vertex v1;
-    protected Vertex v2;
+    protected VertexPair ends;
     protected int weight;
     
     /**
@@ -20,10 +19,9 @@ public class Edge {
     * @param weight is the weight of this edge 
     * @param myGraph is the graph this edge belongs to 
     **/
-    public Edge(Vertex to, Vertex from, boolean directed, int weight, WUGraph myGraph) {
+    public Edge(Object to, Object from, int weight, WUGraph myGraph) {
         partner = null;
-        this.v1 = to;
-        this.v2 = from;
+        this.ends = new VertexPair(to, from);
         this.weight = weight;
         this.myGraph = myGraph;
     }
@@ -36,26 +34,17 @@ public class Edge {
     * @param weight is the weight of this edge 
     * @param myGraph is the graph this edge belongs to 
     **/
-    public Edge(Vertex to, Vertex from, Edge partner, boolean directed, int weight, WUGraph myGraph) {
+    public Edge(Object to, Object from, Edge partner, int weight, WUGraph myGraph) {
         this.partner = partner;
-        this.v1 = to;
-        this.v2 = from;
+        this.ends = new VertexPair(to, from);
         this.weight = weight;
         this.myGraph = myGraph;
     }
-
     /**
-    * returns where edge points  
+    * returns the vertexPair associated with this Edge
     **/
-    public Vertex getv2() {
-        return this.v2;
-    }
-
-    /**
-    * returns where edge came from
-    **/
-    public Vertex getv1() {
-        return this.v1;
+    public VertexPair getEdgePair() {
+        return this.ends;
     }
 
     /**
@@ -92,6 +81,10 @@ public class Edge {
             return;
         }
         this.partner = partner;
+    }
+
+    public void removeThis() {
+        // removes this edge from the internal representation of this graph
     }
 
     /**

@@ -13,6 +13,8 @@ public class WUGraph {
   protected HashTableChained vertexRef;
   protected HashTableChained edgeRef;
   protected DList vertices;
+  protected int vCount;
+  protected int eCount;
 
   /**
    * WUGraph() constructs a graph having no vertices or edges.
@@ -30,7 +32,7 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int vertexCount() {
-    return vertexRef.size();
+    return vCount;
   }
 
   /**
@@ -39,7 +41,7 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public int edgeCount() {
-      return edgeRef.size();
+      return eCount;
   }
 
   /**
@@ -63,8 +65,8 @@ public class WUGraph {
             toReturn[index] = curr.item();
             curr = (DListNode)curr.next();
             index++;
-        }
-    }
+
+    }}
     catch (InvalidNodeException e1) {
         // End of vertex list
     }
@@ -78,13 +80,18 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public void addVertex(Object vertex) {
+
+    //check if this vertex is already in the graph
+    if (vertexRef.find(vertex) != null) {
+        return;
+    }
     //initialize vertex with name, insert into DList  
     Vertex toAdd = new Vertex(vertex, this);
     vertices.insertBack((Object)toAdd);
 
-    //hash in table and point to internal DList 
-    int key = vertexRef.compFunction(toAdd.hashCode());
-    vertexRef.insert(key, (Object)toAdd);
+    //hash in table and point to internal DList
+    vertexRef.insert(vertex, (Object)toAdd);
+    vCount++;
   }
 
 
@@ -99,8 +106,55 @@ public class WUGraph {
       if (!isVertex(vertex)) {
           return;
       }
-      // iterate through the edges and remove them
-      // remove edges from hash table
+
+      // must do the following:
+      // 1. Find the vertex to remove internally
+      // 2. Iterate through its edges and delete them along with their partner edges
+      // 3. Remove the Vertex from vertexRef table; update vCount 
+
+      // find internal representation of Vertex
+      Vertex toRemove = getVertex(vertex);
+
+      // iterate through the internal edges and remove them along with partners
+      DList internalEdges = toRemove.getEdges();
+      DListNode curr = (DListNode) internalEdges.front();
+      try {
+          while (curr.isValidNode()) {
+
+              // update references to edge and partner
+              Edge edge = (Edge) curr.item();
+              VertexPair currEdges = edge.getEdgePair();
+              Object remove1 = currEdges.object1;
+              Object remove2 = currEdges.object2;
+              removeEdge(remove1, remove2);
+
+              curr = (DListNode) curr.next();
+          }
+      }
+      catch (InvalidNodeException e3) {
+          System.err.println(e3); // back to Sentinel
+      }
+
+      // remove hash from vertexRef
+      vertexRef.remove(vertex);
+      vCount--;
+  }
+
+  /**
+   * getVertex() takes in the applications Vertex and find the associated internal representation
+   * of that Vertex object. Returns null if such a Vertex is not a part of this graph.
+   * @param vertex
+   * @return the internal representation of a Vertex in this graph
+   */
+  private Vertex getVertex(Object vertex) {
+      if (vertexRef.find(vertex) == null) {
+          return null;
+      }
+      // find the vertex in vertexRef and return its value
+      Entry internalVertex = vertexRef.find(vertex);
+      Vertex internalValue = (Vertex) internalVertex.value();
+
+      return internalValue;
   }
 
   /**
@@ -111,8 +165,8 @@ public class WUGraph {
    */
   public boolean isVertex(Object vertex) {
     // decide if vertex is a Valid vertex in this graph.
-    if (((Vertex)vertex).getGraph() == this) {
-      return true;
+    if (vertexRef.find(vertex) != null) {
+        return true;
     }
     return false;
   }
@@ -191,6 +245,16 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public boolean isEdge(Object u, Object v) {
+      // case 1: either u or v is not a vertex of this graph
+      if (!isVertex(u) || !isVertex(v)) {
+          return false;
+      }
+
+      // case 2: both vertices exist: check edgeRef for edge (u, v) and (v, u)
+      VertexPair possibleEdge = new VertexPair(u, v);
+      if (edgeRef.find(possibleEdge) != null) {
+          return true;
+      }
       return false;
   }
 
