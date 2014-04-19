@@ -283,7 +283,26 @@ public class WUGraph {
    */
   public void addEdge(Object u, Object v, int weight) {
       if (isEdge(u, v)) {
-          return;
+          Edge modify = ((Edge)edgeRef.find(new VertexPair(u, v)).value());
+          modify.setWeight(weight);
+      }
+      else if (u == v) {
+          VertexPair toInsert = new VertexPair(u, v);
+          Edge value = new Edge(toInsert, weight, this);
+          this.edgeRef.insert(toInsert, value);
+          Vertex list = null;
+          try {
+            list = (Vertex)((DListNode)(vertexRef.find(u).value())).item();
+          }
+          catch (InvalidNodeException e) {
+              System.out.println("nopee");
+          }
+          if (list == null) {
+              System.out.println("SHOULDNT BE NULL");
+          }
+          list.edges.insertBack(value);
+          value.parent = (DListNode)list.edges.back();
+          eCount++;
       }
       else {
         if (!isVertex(u) || !isVertex(v)) {
