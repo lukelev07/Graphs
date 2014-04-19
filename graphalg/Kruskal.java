@@ -4,9 +4,11 @@ package graphalg;
 
 import graph.*;
 import graphalg.queues.LinkedQueue;
+import graphalg.queues.QueueEmptyException;
 import list.DList;
 import list.List;
 import set.*;
+import dict.*;
 
 
 /**
@@ -27,18 +29,51 @@ public class Kruskal {
         WUGraph myGraph = new WUGraph();
         LinkedQueue edgeList = new LinkedQueue();
         Object[] vertices = g.getVertices();
-        for(Object o:vertices){
+        KruskalVertex[] kVertices = new KruskalVertex[vertices.length];
+        HashTableChained myTable = new HashTableChained(vertices.length);
+        for(int j = 0; j < vertices.length; j++){
+            Object o = vertices[j];
+            KruskalVertex k = new KruskalVertex(j,o);
+            myTable.insert(o,k);
             myGraph.addVertex(o);
+        }
+        for(Object o:vertices){
             Neighbors neighbors = g.getNeighbors(o);
             Object[] neighborObjects = neighbors.neighborList;
             int[] weights = neighbors.weightList;
+            KruskalVertex k = (KruskalVertex) myTable.find(o).value();
             for(int i = 0; i < neighborObjects.length; i++){
-                Edge2 newEdge = new Edge2(o,neighborObjects[i],weights[i]);
+                KruskalVertex v = (KruskalVertex) myTable.find(neighborObjects[i]).value();
+                Edge2 newEdge = new Edge2(k,v,weights[i]);
                 edgeList.enqueue(newEdge);
             }
         }
         ListSorts.quickSort(edgeList);
+        placeEdges(edgeList,myGraph,vertices.length);
         return myGraph;
+    }
+
+    private static void placeEdges(LinkedQueue edges, WUGraph g, int numElem){
+        DisjointSets mySet = new DisjointSets(numElem);
+        try{
+            while (!edges.isEmpty()){
+                Edge2 currEdge = (Edge2) edges.dequeue();
+                KruskalVertex kVertex = (KruskalVertex) currEdge.getv1();
+                KruskalVertex otherVertex = (KruskalVertex) currEdge.getv2();
+                int kInt = mySet.find(kVertex.getValue());
+                int otherInt = mySet.find(otherVertex.getValue());
+                if (kInt == otherInt){
+                    continue;
+                }
+                else{
+                    g.addEdge(kVertex.getObject(),otherVertex.getObject(),currEdge.getWeight());
+                    mySet.union(kInt,otherInt);
+                }
+
+            }
+        }
+        catch (QueueEmptyException e){System.out.println("oh no");}
+
     }
 
     public static void test(){
