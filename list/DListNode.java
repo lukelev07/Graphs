@@ -97,7 +97,7 @@ public class DListNode extends ListNode {
       DListNode node2 = ((DList)myList).newNode(item, (DList)myList, this, this.next);
       this.next = node2;
       node2.next.prev = node2;
-      //size++;
+      myList.size++;
     // Your solution here.  Will look something like your Homework 4 solution,
     //   but changes are necessary.  For instance, there is no need to check if
     //   "this" is null.  Remember that this node's "myList" field tells you
@@ -121,7 +121,7 @@ public class DListNode extends ListNode {
     DListNode node2 = ((DList)myList).newNode(item, (DList)myList, this.prev, this);
     this.prev = node2;
     node2.prev.next = node2;
-    //size++;
+    myList.size++;
     // Your solution here.  Will look something like your Homework 4 solution,
     //   but changes are necessary.  For instance, there is no need to check if
     //   "this" is null.  Remember that this node's "myList" field tells you
@@ -154,6 +154,7 @@ public class DListNode extends ListNode {
     // Set other references to null to improve garbage collection.
     next = null;
     prev = null;
+    myList.size--;
   }
 
 }

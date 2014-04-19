@@ -250,7 +250,9 @@ public class WUGraph {
       toReturn.neighborList = new Object[insert.edges.length()];
       toReturn.weightList = new int[insert.edges.length()];
       DListNode curr = (DListNode) insert.edges.front();
+      boolean  entered = false;
       while (curr.isValidNode()) {
+          entered = true;
           try {
             toReturn.neighborList[i] = curr.item();
             VertexPair findEdge = new VertexPair(vertex, (Vertex)curr.item());
@@ -262,6 +264,9 @@ public class WUGraph {
           catch (InvalidNodeException e) {
               System.out.println("broken while loop dude");
           }
+      }
+      if (!entered) {
+          return null;
       }
       return toReturn;
   }
