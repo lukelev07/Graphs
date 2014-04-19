@@ -252,8 +252,10 @@ public class WUGraph {
         this.edgeRef.insert(toInsert, value);
         Vertex list = (Vertex)((DListNode)(vertexRef.find(u).value())).item();
         list.edges.insertBack(value);
+        value.parent = (DListNode)list.edges.back();
         Vertex list2 = (Vertex)((DListNode)(vertexRef.find(v).value())).item();
         list2.edges.insertBack(second);
+        second.parent = (DListNode)list.edges.back();
         eCount++;
         }
         catch (InvalidNodeException e) {
@@ -272,7 +274,41 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public void removeEdge(Object u, Object v) {
-      return;
+      if (isEdge(u, v)) {
+        if (!isVertex(u) || !isVertex(v)) {
+            System.out.println("this isnt an edge");
+            return;
+        }
+        VertexPair findThis = new VertexPair(u, v);
+        Edge found = (Edge) edgeRef.find(findThis).value();
+        if (found.parent == null) {
+            System.out.println("error");
+            return;
+        }
+        if (found.hasPartner()) {
+            if (found.partner.parent == null) {
+                System.out.println("error2");
+                return;
+            }
+            try {
+                ((DListNode)found.partner.parent).remove();
+                ((DListNode)found.parent).remove();
+                edgeRef.remove(findThis);
+            }
+            catch (InvalidNodeException e) {
+                System.out.println("hi, shouldnt happen");
+            }
+        }
+        else {
+            try {
+                ((DListNode)found.parent).remove();
+                edgeRef.remove(findThis);
+            }
+            catch (InvalidNodeException e) {
+                System.out.println("hi2, shouldnt happen");
+            }
+        }
+      }
   }
 
   /**

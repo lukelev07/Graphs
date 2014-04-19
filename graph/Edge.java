@@ -11,7 +11,7 @@ public class Edge {
     protected Edge partner;
     protected VertexPair ends;
     protected int weight;
-    
+    protected DListNode parent;
     /**
     * Constructor for an edge without a partner in an undirected weighted graph
     * @param to is the vertex which this edge points 
