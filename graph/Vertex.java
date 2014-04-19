@@ -8,6 +8,7 @@ public class Vertex {
     protected DList edges;
     protected WUGraph myGraph;
     protected Object name; 
+    protected DListNode parent;
 
     /** 
     * Constructs a vertex with a reference to the graph it is part of.

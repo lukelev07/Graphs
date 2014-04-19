@@ -58,6 +58,7 @@ public class WUGraph {
    */
   public Object[] getVertices() {
     Object[] toReturn = new Object[vCount];
+    System.out.println(vCount);
     int index = 0;
     DListNode curr = (DListNode)vertices.front();
     try {
@@ -92,6 +93,7 @@ public class WUGraph {
 
     //hash in table and point to internal DList
     vertexRef.insert(vertex, vertices.back());
+    toAdd.parent = (DListNode)vertices.back();
     vCount++;
   }
 
@@ -105,6 +107,7 @@ public class WUGraph {
    */
   public void removeVertex(Object vertex) {
       if (!isVertex(vertex)) {
+          System.out.println("hey this isnt a vertex");
           return;
       }
 
@@ -138,6 +141,13 @@ public class WUGraph {
 
       // remove hash from vertexRef
       vertexRef.remove(vertex);
+      try {
+        toRemove.parent.remove();
+      }
+      catch (InvalidNodeException e) {
+          System.out.println("wat");
+      }
+      System.out.println("removed this");
       vCount--;
   }
 
@@ -318,6 +328,7 @@ public class WUGraph {
             }
         }
       }
+      eCount--;
   }
 
   /**
