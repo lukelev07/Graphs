@@ -199,6 +199,7 @@ public class WUGraph {
    */
   public int degree(Object vertex) {
       if (!isVertex(vertex)) {
+          System.out.println("this");
           return 0;
       }
       Vertex toDegree = null;

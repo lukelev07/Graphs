@@ -94,15 +94,9 @@ public class DListNode extends ListNode {
     if (!isValidNode()) {
       throw new InvalidNodeException("insertAfter() called on invalid node");
     }
-      DListNode node2 = ((DList)myList).newNode(item, (DList)myList, this, this.next);
-      this.next = node2;
-      node2.next.prev = node2;
-      myList.size++;
-    // Your solution here.  Will look something like your Homework 4 solution,
-    //   but changes are necessary.  For instance, there is no need to check if
-    //   "this" is null.  Remember that this node's "myList" field tells you
-    //   what DList it's in.  You should use myList.newNode() to create the
-    //   new node.
+    next = ((DList) myList).newNode(item, (DList) myList, this, next);
+    next.next.prev = next;
+    myList.size++;
   }
 
   /**
@@ -118,15 +112,9 @@ public class DListNode extends ListNode {
     if (!isValidNode()) {
       throw new InvalidNodeException("insertBefore() called on invalid node");
     }
-    DListNode node2 = ((DList)myList).newNode(item, (DList)myList, this.prev, this);
-    this.prev = node2;
-    node2.prev.next = node2;
+    prev = ((DList) myList).newNode(item, (DList) myList, prev, this);
+    prev.prev.next = prev;
     myList.size++;
-    // Your solution here.  Will look something like your Homework 4 solution,
-    //   but changes are necessary.  For instance, there is no need to check if
-    //   "this" is null.  Remember that this node's "myList" field tells you
-    //   what DList it's in.  You should use myList.newNode() to create the
-    //   new node.
   }
 
   /**
@@ -141,20 +129,15 @@ public class DListNode extends ListNode {
     if (!isValidNode()) {
       throw new InvalidNodeException("remove() called on invalid node");
     }
-    // Your solution here.  Will look something like your Homework 4 solution,
-    //   but changes are necessary.  For instance, there is no need to check if
-    //   "this" is null.  Remember that this node's "myList" field tells you
-    //   what DList it's in.
-    this.prev.next = this.next;
-    this.next.prev = this.prev;
-
-
+    prev.next = next;
+    next.prev = prev;
+    myList.size--;
+    
     // Make this node an invalid node, so it cannot be used to corrupt myList.
     myList = null;
     // Set other references to null to improve garbage collection.
     next = null;
     prev = null;
-    myList.size--;
   }
 
 }
