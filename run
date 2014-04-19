@@ -1,2 +1,4 @@
 #!/bin/bash
-javac *.java list/*.java dict/*.java
+#javac *.java list/*.java dict/*.java graph/*.java
+javac WUGTest.java list/*.java dict/*.java graph/*.java set/*.java
+java WUGTest
