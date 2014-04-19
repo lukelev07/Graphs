@@ -201,7 +201,17 @@ public class WUGraph {
       if (!isVertex(vertex)) {
           return 0;
       }
-      return ((Vertex)vertex).getEdges().length();
+      Vertex toDegree = null;
+      try {
+        toDegree = (Vertex)((DListNode)vertexRef.find(vertex).value()).item();
+      }
+      catch (InvalidNodeException e) {
+          System.out.println("here2");
+      }
+      if (toDegree == null) {
+          System.out.println("no pls");
+      }
+      return toDegree.getEdges().length();
   }
 
   /**
@@ -224,8 +234,19 @@ public class WUGraph {
    */
   public Neighbors getNeighbors(Object vertex) {
       Neighbors toReturn = new Neighbors();
-      Vertex insert = (Vertex)this.vertexRef.find(vertex).value();
+      Vertex insert = null;
+      
+      try {
+          
+        insert = (Vertex)((DListNode)this.vertexRef.find(vertex).value()).item();
+      }
+      catch (InvalidNodeException e) {
+          System.out.println("nope");
+      }
       int i = 0;
+      if (insert == null) {
+          System.out.println("not null pls");
+      }
       toReturn.neighborList = new Object[insert.edges.length()];
       toReturn.weightList = new int[insert.edges.length()];
       DListNode curr = (DListNode) insert.edges.front();
