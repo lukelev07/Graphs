@@ -205,9 +205,23 @@ public class WUGraph {
    */
   public Neighbors getNeighbors(Object vertex) {
       Neighbors toReturn = new Neighbors();
-      Vertex insert = (Vertex)this.vertexRef.find(vertex).key();
+      Vertex insert = (Vertex)this.vertexRef.find(vertex).value();
+      int i = 0;
+      toReturn.neighborList = new Object[insert.edges.length()];
+      toReturn.weightList = new int[insert.edges.length()];
+      DListNode curr = (DListNode) insert.edges.front();
       while (!insert.edges.isEmpty()) {
-          
+          try {
+            toReturn.neighborList[i] = curr.item();
+            VertexPair findEdge = new VertexPair(vertex, (Vertex)curr.item());
+            Edge weightCheck = (Edge)this.edgeRef.find(findEdge).value();
+            toReturn.weightList[i] = weightCheck.weight;
+            i++;
+            curr = (DListNode) curr.next();
+          }
+          catch (InvalidNodeException e) {
+              System.out.println("broken while loop dude");
+          }
       }
       return toReturn;
   }
