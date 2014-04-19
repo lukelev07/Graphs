@@ -57,7 +57,7 @@ public class WUGraph {
    * Running time:  O(|V|).
    */
   public Object[] getVertices() {
-    Object[] toReturn = new Object[vertices.length()];
+    Object[] toReturn = new Object[vCount];
     int index = 0;
     DListNode curr = (DListNode)vertices.front();
     try {
