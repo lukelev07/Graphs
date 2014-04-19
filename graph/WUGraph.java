@@ -236,7 +236,20 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public void addEdge(Object u, Object v, int weight) {
-      
+      if (isEdge(u, v)) {
+          return;
+      }
+      else {
+        if (!isVertex(u) || !isVertex(v)) {
+            return;
+        }
+        VertexPair toInsert = new VertexPair(u, v);
+        Edge value = new Edge(toInsert, weight, this);
+        Edge second = new Edge(toInsert, weight, this);
+        value.
+        this.edgeRef.insert(toInsert, value);
+        eCount++;
+      }
   }
 
   /**

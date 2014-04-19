@@ -62,7 +62,7 @@ public class DList extends List {
       head = newNode(Integer.MIN_VALUE, null, null, null);
       head.next = head;
       head.prev = head;
-      //size = 0;
+      size = 0;
   }
 
   /**
@@ -75,7 +75,7 @@ public class DList extends List {
   public void insertFront(Object item) {
     // Your solution here.  Similar to Homework 4, but now you need to specify
     //   the `list' field (second parameter) as well.
-    //size++;
+    size++;
     DListNode node = newNode(item, this, head, head.next);
     node.next.prev = node;
     head.next = node;
@@ -94,7 +94,7 @@ public class DList extends List {
     DListNode node = newNode(item, this, head.prev, head);
     node.prev.next = node;
     head.prev = node;
-    //size++;
+    size++;
   }
 
   /**
