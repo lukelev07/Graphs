@@ -243,12 +243,23 @@ public class WUGraph {
         if (!isVertex(u) || !isVertex(v)) {
             return;
         }
+        try {
         VertexPair toInsert = new VertexPair(u, v);
         Edge value = new Edge(toInsert, weight, this);
         Edge second = new Edge(toInsert, weight, this);
-        value.
+        value.partner = second;
+        second.partner = value;
         this.edgeRef.insert(toInsert, value);
+        Vertex list = (Vertex)((DListNode)(vertexRef.find(u).value())).item();
+        list.edges.insertBack(value);
+        Vertex list2 = (Vertex)((DListNode)(vertexRef.find(v).value())).item();
+        list2.edges.insertBack(second);
         eCount++;
+        }
+        catch (InvalidNodeException e) {
+            //you returned a node from the giant dlist without an item somehow
+            System.out.println("hello");
+        }
       }
   }
 
