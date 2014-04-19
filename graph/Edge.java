@@ -26,6 +26,13 @@ public class Edge {
         this.myGraph = myGraph;
     }
     
+    public Edge(VertexPair vp, int weight, WUGraph myGraph) {
+        partner = null;
+        this.ends = vp;
+        this.weight = weight;
+        this.myGraph = myGraph;
+    }
+    
     /**
     * Constructor for an edge with a partner in a weighted undirected graph.
     * @param to is the vertex which this edge points 
