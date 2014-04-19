@@ -153,8 +153,16 @@ public class WUGraph {
       }
       // find the vertex in vertexRef and return its value
       Entry internalVertex = vertexRef.find(vertex);
-      Vertex internalValue = (Vertex) internalVertex.value();
-
+      Vertex internalValue = null;
+      try {
+        internalValue = (Vertex) (((DListNode)internalVertex.value()).item());
+      }
+      catch (InvalidNodeException e) {
+          System.out.println("vertex dlist poitner has  no value");
+      }
+      if (internalValue == null) {
+          System.out.println("this is bad");
+      }
       return internalValue;
   }
 
