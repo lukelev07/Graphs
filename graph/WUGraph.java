@@ -256,7 +256,7 @@ public class WUGraph {
           entered = true;
           try {
             toReturn.neighborList[i] = curr.item();
-            VertexPair findEdge = new VertexPair(vertex, (Vertex)curr.item());
+            VertexPair findEdge = ((Edge)curr.item()).ends;
             Edge weightCheck = (Edge)this.edgeRef.find(findEdge).value();
             toReturn.weightList[i] = weightCheck.weight;
             i++;
