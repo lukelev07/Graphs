@@ -1,6 +1,6 @@
 /* ListSorts.java */
-
-import queues.*;
+package graphalg;
+import graphalg.queues.*;
 
 public class ListSorts {
 
@@ -163,40 +163,5 @@ public class ListSorts {
     return q;
   }
 
-  /**
-   *  main() performs some tests on mergesort and quicksort.  Feel free to add
-   *  more tests of your own to make sure your algorithms works on boundary
-   *  cases.  Your test code will not be graded.
-   **/
-  public static void main(String [] args) {
-
-    LinkedQueue q = makeRandom(10);
-    System.out.println(q.toString());
-    mergeSort(q);
-    System.out.println(q.toString());
-
-    q = makeRandom(10);
-    System.out.println(q.toString());
-    quickSort(q);
-    System.out.println(q.toString());
-
-    //Remove these comments for Part III.
-    Timer stopWatch = new Timer();
-    q = makeRandom(SORTSIZE);
-    stopWatch.start();
-    mergeSort(q);
-    stopWatch.stop();
-    System.out.println("Mergesort time, " + SORTSIZE + " Integers:  " +
-                       stopWatch.elapsed() + " msec.");
-
-    stopWatch.reset();
-    q = makeRandom(SORTSIZE);
-    stopWatch.start();
-    quickSort(q);
-    stopWatch.stop();
-    System.out.println("Quicksort time, " + SORTSIZE + " Integers:  " +
-                       stopWatch.elapsed() + " msec.");
-    
-  }
 
 }
