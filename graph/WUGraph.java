@@ -57,7 +57,7 @@ public class WUGraph {
    * Running time:  O(|V|).
    */
   public Object[] getVertices() {
-    Object[] toReturn = new Object[vertices.length()];
+    Object[] toReturn = new Object[vertices.length()+1];
     int index = 0;
     DListNode curr = (DListNode)vertices.front();
     try {
@@ -210,7 +210,7 @@ public class WUGraph {
       toReturn.neighborList = new Object[insert.edges.length()];
       toReturn.weightList = new int[insert.edges.length()];
       DListNode curr = (DListNode) insert.edges.front();
-      while (!insert.edges.isEmpty()) {
+      while (curr.isValidNode()) {
           try {
             toReturn.neighborList[i] = curr.item();
             VertexPair findEdge = new VertexPair(vertex, (Vertex)curr.item());
@@ -236,7 +236,7 @@ public class WUGraph {
    * Running time:  O(1).
    */
   public void addEdge(Object u, Object v, int weight) {
-      return;
+      
   }
 
   /**
