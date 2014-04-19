@@ -62,13 +62,14 @@ public class WUGraph {
     DListNode curr = (DListNode)vertices.front();
     try {
         while (curr.isValidNode()) {
-            toReturn[index] = curr.item();
+            toReturn[index] = ((Vertex)curr.item()).name;
             curr = (DListNode)curr.next();
             index++;
 
     }}
     catch (InvalidNodeException e1) {
         // End of vertex list
+        System.out.println("hi");
     }
     return toReturn;
   }
