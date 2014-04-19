@@ -90,7 +90,7 @@ public class WUGraph {
     vertices.insertBack((Object)toAdd);
 
     //hash in table and point to internal DList
-    vertexRef.insert(vertex, (Object)toAdd);
+    vertexRef.insert(vertex, vertices.back());
     vCount++;
   }
 
