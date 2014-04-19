@@ -237,6 +237,9 @@ public class WUGraph {
       Neighbors toReturn = new Neighbors();
       Vertex insert = null;
       
+      if (!isVertex(vertex)) {
+          return null;
+      }
       try {
           
         insert = (Vertex)((DListNode)this.vertexRef.find(vertex).value()).item();
@@ -255,7 +258,12 @@ public class WUGraph {
       while (curr.isValidNode()) {
           entered = true;
           try {
-            toReturn.neighborList[i] = curr.item();
+            if (((Edge)curr.item()).ends.object1 != vertex) {
+                toReturn.neighborList[i] = ((Edge)curr.item()).ends.object1;
+            }
+            else {
+                toReturn.neighborList[i] = ((Edge)curr.item()).ends.object2;
+            }
             VertexPair findEdge = ((Edge)curr.item()).ends;
             Edge weightCheck = (Edge)this.edgeRef.find(findEdge).value();
             toReturn.weightList[i] = weightCheck.weight;
@@ -320,7 +328,7 @@ public class WUGraph {
         value.parent = (DListNode)list.edges.back();
         Vertex list2 = (Vertex)((DListNode)(vertexRef.find(v).value())).item();
         list2.edges.insertBack(second);
-        second.parent = (DListNode)list.edges.back();
+        second.parent = (DListNode)list2.edges.back();
         eCount++;
         }
         catch (InvalidNodeException e) {
@@ -362,6 +370,7 @@ public class WUGraph {
             }
             catch (InvalidNodeException e) {
                 System.out.println("hi, shouldnt happen");
+                System.err.println(e);
             }
         }
         else {
