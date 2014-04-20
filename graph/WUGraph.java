@@ -136,7 +136,7 @@ public class WUGraph {
           }
       }
       catch (InvalidNodeException e3) {
-          System.err.println(e3); // back to Sentinel
+          //System.err.println(e3); // back to Sentinel
       }
 
       // remove hash from vertexRef
@@ -293,6 +293,7 @@ public class WUGraph {
       if (isEdge(u, v)) {
           Edge modify = ((Edge)edgeRef.find(new VertexPair(u, v)).value());
           modify.setWeight(weight);
+          return;
       }
       else if (u == v) {
           VertexPair toInsert = new VertexPair(u, v);
@@ -383,6 +384,7 @@ public class WUGraph {
             }
         }
       }
+      System.out.println("HERE");
       eCount--;
   }
 
