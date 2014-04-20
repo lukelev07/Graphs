@@ -63,7 +63,11 @@ public class Kruskal {
         placeEdges(edgeList,myGraph,vertices.length);
         return myGraph;
     }
-
+    /**
+     * @param edges the sorted LinkedQueue of possible edges
+     * @param g the WUGraph to add the edges to
+     * @param numElem the number of vertices
+     */
     private static void placeEdges(LinkedQueue edges, WUGraph g, int numElem){
         DisjointSets mySet = new DisjointSets(numElem);
         try{
@@ -85,22 +89,6 @@ public class Kruskal {
         }
         catch (QueueEmptyException e){System.out.println("oh no");}
 
-    }
-
-    public static void test(){
-        LinkedQueue newQueue = new LinkedQueue();
-        newQueue.enqueue(new Edge2(new Integer(1),new Integer(3), 5));
-        newQueue.enqueue(new Edge2(new Integer(6),new Integer(9), 3));
-        newQueue.enqueue(new Edge2(new Integer(5),new Integer(0), 12));
-        ListSorts.quickSort(newQueue);
-        System.out.println(newQueue.toString());
-
-    }
-
-
-
-    public static void main(String[] args){
-        //test();
     }
 
 }
