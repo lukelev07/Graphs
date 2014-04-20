@@ -58,7 +58,6 @@ public class WUGraph {
    */
   public Object[] getVertices() {
     Object[] toReturn = new Object[vCount];
-    System.out.println(vCount);
     int index = 0;
     DListNode curr = (DListNode)vertices.front();
     try {
@@ -124,19 +123,19 @@ public class WUGraph {
       DListNode curr = (DListNode) internalEdges.front();
       try {
           while (curr.isValidNode()) {
-
               // update references to edge and partner
               Edge edge = (Edge) curr.item();
               VertexPair currEdges = edge.getEdgePair();
               Object remove1 = currEdges.object1;
               Object remove2 = currEdges.object2;
-              removeEdge(remove1, remove2);
-
               curr = (DListNode) curr.next();
+              removeEdge(remove1, remove2);
+              
+              
           }
       }
       catch (InvalidNodeException e3) {
-          //System.err.println(e3); // back to Sentinel
+          System.err.println(e3); // back to Sentinel
       }
 
       // remove hash from vertexRef
@@ -147,7 +146,6 @@ public class WUGraph {
       catch (InvalidNodeException e) {
           System.out.println("wat");
       }
-      System.out.println("removed this");
       vCount--;
   }
 
@@ -199,7 +197,6 @@ public class WUGraph {
    */
   public int degree(Object vertex) {
       if (!isVertex(vertex)) {
-          System.out.println("this");
           return 0;
       }
       Vertex toDegree = null;
@@ -309,9 +306,10 @@ public class WUGraph {
           if (list == null) {
               System.out.println("SHOULDNT BE NULL");
           }
-          list.edges.insertBack(value);
-          value.parent = (DListNode)list.edges.back();
+          list.edges.insertFront(value);
+          value.parent = (DListNode)list.edges.front();
           eCount++;
+          return;
       }
       else {
         if (!isVertex(u) || !isVertex(v)) {
@@ -325,11 +323,11 @@ public class WUGraph {
         second.partner = value;
         this.edgeRef.insert(toInsert, value);
         Vertex list = (Vertex)((DListNode)(vertexRef.find(u).value())).item();
-        list.edges.insertBack(value);
-        value.parent = (DListNode)list.edges.back();
+        list.edges.insertFront(value);
+        value.parent = (DListNode)list.edges.front();
         Vertex list2 = (Vertex)((DListNode)(vertexRef.find(v).value())).item();
-        list2.edges.insertBack(second);
-        second.parent = (DListNode)list2.edges.back();
+        list2.edges.insertFront(second);
+        second.parent = (DListNode)list2.edges.front();
         eCount++;
         }
         catch (InvalidNodeException e) {
@@ -384,7 +382,9 @@ public class WUGraph {
             }
         }
       }
-      System.out.println("HERE");
+      else {
+          return;
+      }
       eCount--;
   }
 
