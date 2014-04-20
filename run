@@ -2,4 +2,5 @@
 #javac *.java list/*.java dict/*.java graph/*.java
 javac WUGTest.java KruskalTest.java graphalg/*.java list/*.java dict/*.java graph/*.java set/*.java
 java WUGTest
-printf "\n\n\n\n\nKruskalTest starts here"
+printf "\n\n\n\n\nKruskalTest starts here\n\n\n\n"
+java KruskalTest
