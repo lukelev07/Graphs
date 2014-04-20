@@ -5,8 +5,6 @@ package graphalg;
 import graph.*;
 import graphalg.queues.LinkedQueue;
 import graphalg.queues.QueueEmptyException;
-import list.DList;
-import list.List;
 import set.*;
 import dict.*;
 
@@ -29,22 +27,35 @@ public class Kruskal {
         WUGraph myGraph = new WUGraph();
         LinkedQueue edgeList = new LinkedQueue();
         Object[] vertices = g.getVertices();
-        KruskalVertex[] kVertices = new KruskalVertex[vertices.length];
         HashTableChained myTable = new HashTableChained(vertices.length);
-        for(int j = 0; j < vertices.length; j++){
-            Object o = vertices[j];
-            KruskalVertex k = new KruskalVertex(j,o);
-            myTable.insert(o,k);
+        int j = 0;
+        for(int x = 0; x < vertices.length;x++){
+            Object o = vertices[x];
+            Object k = myTable.find(o);
+            if ( k == null){
+                k = new KruskalVertex(j,o);
+                myTable.insert(o,k);
+                j++;
+            }
+            else{
+                k = ((Entry) k).value();
+            }
             myGraph.addVertex(o);
-        }
-        for(Object o:vertices){
             Neighbors neighbors = g.getNeighbors(o);
             Object[] neighborObjects = neighbors.neighborList;
             int[] weights = neighbors.weightList;
-            KruskalVertex k = (KruskalVertex) myTable.find(o).value();
             for(int i = 0; i < neighborObjects.length; i++){
-                KruskalVertex v = (KruskalVertex) myTable.find(neighborObjects[i]).value();
-                Edge2 newEdge = new Edge2(k,v,weights[i]);
+                Object v = myTable.find(neighborObjects[i]);
+                Object other;
+                if (v == null){
+                    other = new KruskalVertex(j,neighborObjects[i]);
+                    myTable.insert(neighborObjects[i],other);
+                    j++;
+                }
+                else{
+                    other = ((Entry) v).value();
+                }
+                Edge2 newEdge = new Edge2(k,other,weights[i]);
                 edgeList.enqueue(newEdge);
             }
         }
