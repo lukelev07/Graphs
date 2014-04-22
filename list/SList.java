@@ -141,6 +141,10 @@ public class SList extends List {
     }
     return result + "]";
   }
+  
+  /*
+  Hi Grader, the following is test code, pls ignore
+  */
 
   private static void testInvalidNode(ListNode p) {
     System.out.println("p.isValidNode() should be false: " + p.isValidNode());
