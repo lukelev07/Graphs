@@ -1,0 +1,31 @@
+Basic Structure of our Graph:
+
+Our graph is based on two hash tables--from the “HashTableChained.java” class-- for quickly accessing Vertices and Edges, which are important items a user application of our graph would want.  On top of this implementation, we support several actions for both edges and vertices that are aided by other pieces of our data structure.  
+
+If the user supplies a _vertex_ to be inserted or removed, or if the user wants to get a vertex from the graph, this is the process:
+Hash the supplied vertex and find it in the hash table.  This points to the Vertex in the DList of vertices, where it contains a DList of edges connecting THIS vertex to any others via the stored edges.  This is where it meets the other “side” of the implementation, described below
+
+If the user supplies an _edge_ between two vertices to be edited in weight, removed, or added, this is the process:
+
+The Edge hashtable allows the user to supply an edge to be dealt with, so the provided edge is hashed and located in the hash table.  This points it to its DListNode in the edge DList contained by its vertex.  Edges can have partners, which means that it is not a self-edge in the graph.  Because our graph uses an adjacency list, if there is an edge from A to B, both vertices A and B need to store the same edge in their DList of edges.  This is the purpose for partner references; if the edge needs to be removed, both entries in A and B vertices need to be removed.
+
+
+Basic Process of Kruskal:
+
+The implementation of Kruskals algorithm we used follows directly from the lecture notes. When sorting the items, we chose to use quicksort from last weeks homework. For more information on how we implemented “Kruskal.java” please refer to the lecture 29 notes. 
+
+Design Element 2:
+
+getVertices() runs in O(|V|) time. Our implementation stores the internal representation of the vertices in a doubly-linked list, so iterating through the list to return the vertices never exceeds O(|V|) time. These items are returned in an object array to preserve encapsulation.
+
+Design Element 4:
+
+removeVertex() runs in O(d) time because:
+
+1. finding the vertex takes O(1) time (this is an advantage of our hash table for vertices, vertexRef).  
+2. the Vertex object stores a DList of all of its edges, with length d (degree of the vertex).  Each of the edges needs to be removed, which happens d times.  If an edge has a partner, that’s ok; we have a direct pointer to it in the partner field of the edge, so it’s easy to remove from there
+
+
+
+
+
