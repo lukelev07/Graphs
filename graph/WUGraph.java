@@ -106,7 +106,6 @@ public class WUGraph {
      */
     public void removeVertex(Object vertex) {
         if (!isVertex(vertex)) {
-            System.out.println("hey this isnt a vertex");
             return;
         }
 
