@@ -14,10 +14,16 @@ public class Entry {
   protected Object key;
   protected Object value;
 
+  /**
+  * @return the object that represents the key gets returned
+  */
   public Object key() {
     return key;
   }
 
+  /**
+  * @return the object that represents the key gets returned
+  */
   public Object value() {
     return value;
   }
